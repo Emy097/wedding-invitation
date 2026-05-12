@@ -1,0 +1,301 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  background: #1a1714;
+  color: #2c2420;
+  --title-olive: #3d4a32;
+  --title-olive-soft: #4f5d42;
+}
+
+/* Mobile-first: full viewport stage, no outer padding */
+.stage {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
+  width: 100%;
+  max-width: 100vw;
+  display: grid;
+  place-items: stretch;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.stage:focus {
+  outline: none;
+}
+
+.stage:focus-visible:not(.is-revealed) {
+  outline: 2px solid rgba(250, 246, 240, 0.55);
+  outline-offset: -2px;
+}
+
+.stage.is-revealed {
+  cursor: default;
+}
+
+.shell {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
+}
+
+.shell > * {
+  grid-area: 1 / 1;
+  align-self: stretch;
+  justify-self: stretch;
+}
+
+.card {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #141210;
+}
+
+/* Full-bleed couple photo; color → grayscale + blur after envelope (delay matches JS totalMs) */
+.card__hero {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.card__hero-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  filter: saturate(1) blur(0);
+  transform: scale(1);
+}
+
+/*
+ * Timeline from .stage.is-revealed:
+ * ~0–1s: envelope still sliding (photo underneath, mostly hidden)
+ * ~1s+: full color briefly, then soften; then content sheet rises
+ */
+.stage.is-revealed .card__hero-img {
+  animation: card-hero-to-muted 1.45s ease-in-out 1.05s forwards;
+}
+
+@keyframes card-hero-to-muted {
+  0% {
+    filter: saturate(1) blur(0);
+  }
+
+  100% {
+    filter: saturate(0) blur(6px);
+  }
+}
+
+/* Readable panel sliding up over muted photo */
+.card__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  min-height: min(58vh, 28rem);
+  max-height: 78vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: clamp(1.75rem, 5vw, 2.5rem) clamp(1.25rem, 5vw, 1.75rem) calc(1.75rem + env(safe-area-inset-bottom));
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(250, 246, 240, 0.06) 0%,
+    rgba(248, 244, 237, 0.94) 22%,
+    rgba(245, 240, 232, 0.98) 100%
+  );
+  border-radius: 1.35rem 1.35rem 0 0;
+  box-shadow:
+    0 -12px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(61, 74, 50, 0.06);
+  transform: translateY(108%);
+  opacity: 0;
+}
+
+.stage.is-revealed .card__body {
+  animation: card-body-rise 0.95s cubic-bezier(0.33, 1, 0.32, 1) 2.35s forwards;
+}
+
+@keyframes card-body-rise {
+  from {
+    transform: translateY(108%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.card__body-inner {
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+.card__eyebrow {
+  margin: 0 0 0.65rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(0.9rem, 3.2vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--title-olive-soft);
+}
+
+.card__names {
+  margin: 0 0 1.1rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 9vw, 2.65rem);
+  line-height: 1.12;
+  color: var(--title-olive);
+  letter-spacing: 0.02em;
+}
+
+.card__line {
+  margin: 0 0 1rem;
+  font-size: clamp(1.05rem, 4vw, 1.25rem);
+  font-style: italic;
+  color: #4a4039;
+}
+
+.card__date,
+.card__place {
+  margin: 0.35rem 0;
+  font-size: clamp(1rem, 3.8vw, 1.15rem);
+}
+
+.card__note {
+  margin: 1.5rem auto 0;
+  max-width: 32ch;
+  font-size: clamp(0.9rem, 3.5vw, 1.02rem);
+  color: #5c534c;
+  line-height: 1.45;
+}
+
+/* Full-screen envelope; both halves stacked (same canvas, complementary alpha) */
+.envelope {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
+}
+
+.envelope__hinge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Identical geometry: same full-viewport box, layers stacked */
+.envelope__track {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: stretch;
+}
+
+.envelope__track--left {
+  z-index: 2;
+}
+
+.envelope__track--right {
+  z-index: 1;
+}
+
+/* Full bleed; same framing on both layers so they stay aligned */
+.envelope__track img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: cover;
+  object-position: 50% 50%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes track-slide-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100vw - 35%));
+  }
+}
+
+@keyframes track-slide-right {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(100vw + 35%));
+  }
+}
+
+.envelope.is-open .envelope__track--left {
+  animation: track-slide-left 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.envelope.is-open .envelope__track--right {
+  animation: track-slide-right 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.envelope.is-gone {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage.is-revealed .card__hero-img {
+    animation: none;
+    filter: saturate(0) blur(5px);
+  }
+
+  .stage.is-revealed .card__body {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .envelope.is-open .envelope__track--left {
+    animation: none;
+    transform: translateX(calc(-100vw - 35%));
+  }
+
+  .envelope.is-open .envelope__track--right {
+    animation: none;
+    transform: translateX(calc(100vw + 35%));
+  }
+}

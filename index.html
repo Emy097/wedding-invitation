@@ -1,11 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Boda</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestra boda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    Boda de Danny y Jacky
+  <div class="stage" id="stage" tabindex="0" aria-label="Invitación. Pulsa o toca en cualquier sitio para abrir.">
+    <div class="shell">
+      <article class="card" id="invitation">
+        <div class="card__hero">
+          <img class="card__hero-img" src="assets/_MG_4547.jpg" alt="Retrato de los novios" decoding="async">
+        </div>
+        <div class="card__body">
+          <div class="card__body-inner">
+            <p class="card__eyebrow">Con mucha ilusión</p>
+            <h1 class="card__names">Nombre &amp; Nombre</h1>
+            <p class="card__line">Os invitamos a celebrar nuestra boda</p>
+            <p class="card__date">Sábado, 00 de mes de 0000</p>
+            <p class="card__place">Lugar por confirmar · Ciudad</p>
+            <p class="card__note">Los detalles definitivos llegarán más adelante.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="envelope" id="envelope" aria-hidden="true">
+        <div class="envelope__hinge">
+          <div class="envelope__track envelope__track--left">
+            <img src="assets/sobre-izquierda.png" alt="" width="512" height="512" decoding="async">
+          </div>
+          <div class="envelope__track envelope__track--right">
+            <img src="assets/sobre-derecha.png" alt="" width="512" height="512" decoding="async">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var stage = document.getElementById('stage');
+      var envelope = document.getElementById('envelope');
+      if (!stage || !envelope) return;
+
+      var unlocked = false;
+      /* Match CSS: envelope slide duration */
+      var totalMs = 1000;
+
+      function reveal() {
+        if (unlocked) return;
+        unlocked = true;
+        envelope.classList.add('is-open');
+        stage.classList.add('is-revealed');
+        stage.setAttribute('aria-label', 'Invitación abierta');
+
+        window.setTimeout(function () {
+          envelope.classList.add('is-gone');
+          stage.removeAttribute('tabindex');
+        }, totalMs);
+      }
+
+      stage.addEventListener('click', function (e) {
+        if (unlocked) return;
+        e.preventDefault();
+        reveal();
+      });
+
+      stage.addEventListener('keydown', function (e) {
+        if (unlocked) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          reveal();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
