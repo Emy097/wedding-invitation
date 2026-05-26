@@ -3,31 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuestra boda</title>
+  <title>Nuestra Boda · Josué y Jaqueline</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="stage" id="stage" tabindex="0" aria-label="Invitación. Pulsa o toca en cualquier sitio para abrir.">
     <div class="shell">
       <article class="card" id="invitation">
-        <div class="card__hero">
-          <img class="card__hero-img" src="assets/_MG_4547.jpg" alt="Retrato de los novios" decoding="async">
-        </div>
-        <div class="card__body">
-          <div class="card__body-inner">
-            <p class="card__eyebrow">Con mucha ilusión</p>
-            <h1 class="card__names">Nombre &amp; Nombre</h1>
-            <p class="card__line">Os invitamos a celebrar nuestra boda</p>
-            <p class="card__date">Sábado, 00 de mes de 0000</p>
-            <p class="card__place">Lugar por confirmar · Ciudad</p>
-            <p class="card__note">Los detalles definitivos llegarán más adelante.</p>
+
+        <!-- ── HERO ── -->
+        <section class="site-hero" id="inicio">
+          <div class="card__hero">
+            <img class="card__hero-img" src="assets/_MG_4547.jpg" alt="Retrato de los novios" decoding="async">
           </div>
-        </div>
+          <div class="card__body">
+            <div class="hero-top-deco" aria-hidden="true">
+              <span></span><span class="hero-top-deco__gem">✦</span><span></span>
+            </div>
+            <div class="card__body-inner">
+              <p class="hero-guest" id="hero-guest"></p>
+              <p class="hero-invite">Los invitamos a celebrar nuestra boda</p>
+              <h1 class="card__names">Josué y Jaqueline</h1>
+              <div class="hero-divider" aria-hidden="true">
+                <span></span><span class="hero-divider__gem">◆</span><span></span>
+              </div>
+              <div class="hero-countdown" id="hero-countdown" role="timer" aria-label="Cuenta atrás para la boda">
+                <div class="hero-countdown__unit">
+                  <span class="hero-countdown__num" id="cd-days">--</span>
+                  <span class="hero-countdown__label">días</span>
+                </div>
+                <div class="hero-countdown__unit">
+                  <span class="hero-countdown__num" id="cd-hours">--</span>
+                  <span class="hero-countdown__label">horas</span>
+                </div>
+                <div class="hero-countdown__unit">
+                  <span class="hero-countdown__num" id="cd-mins">--</span>
+                  <span class="hero-countdown__label">min</span>
+                </div>
+                <div class="hero-countdown__unit">
+                  <span class="hero-countdown__num" id="cd-secs">--</span>
+                  <span class="hero-countdown__label">seg</span>
+                </div>
+              </div>
+              <p class="card__date">Sábado, 14 de noviembre de 2026 · 10:00 h</p>
+              <p class="card__place">Rancho Doña Carmen · Bebedero, Escazú</p>
+              <a href="#nuestra-historia" class="card__cta">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M7 2v10M2 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Descubrir más</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── NAVIGATION ── -->
+        <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+          <div class="site-nav__inner">
+            <a href="#inicio" class="site-nav__brand">J &amp; J</a>
+            <ul class="site-nav__links" id="nav-links" role="list">
+              <li><a href="#ubicacion">Ubicación</a></li>
+              <li><a href="#galeria">Galería</a></li>
+              <li><a href="#regalos">Regalos</a></li>
+            </ul>
+            <button class="site-nav__hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- ── UBICACIÓN ── -->
+        <section class="site-section bg-cream" id="ubicacion">
+          <div class="site-container">
+            <div class="site-header">
+              <p class="site-label">¿Cómo llegar?</p>
+              <h2 class="site-heading">Rancho Doña Carmen</h2>
+              <p class="site-subheading">Bebedero, San Antonio, Escazú · San José, Costa Rica</p>
+            </div>
+            <div class="map-wrap">
+              <iframe
+                src="https://maps.google.com/maps?q=WR3R%2B596+Bebedero+San+Jose+Costa+Rica&hl=es&z=17&output=embed"
+                title="Rancho Doña Carmen en Google Maps"
+                width="800"
+                height="400"
+                frameborder="0"
+                scrolling="no"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <div class="location-ctas">
+              <a
+                href="https://maps.google.com/maps?q=WR3R%2B596+Bebedero+San+Jose+Costa+Rica"
+                target="_blank" rel="noopener noreferrer"
+                class="location-btn location-btn--gmaps">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" width="20" height="20">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                Ver en Google Maps
+              </a>
+              <a
+                href="https://waze.com/ul?q=WR3R%2B596+Bebedero+San+Jose+Costa+Rica&navigate=yes"
+                target="_blank" rel="noopener noreferrer"
+                class="location-btn location-btn--waze">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" width="20" height="20">
+                  <path d="M12 3C7.03 3 3 7.03 3 12c0 2.4.9 4.6 2.4 6.25L5 21l2.9-.7C9.2 21 10.57 21.3 12 21.3c4.97 0 9-4.03 9-9S16.97 3 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <circle cx="9.5" cy="10.5" r="1" fill="currentColor"/>
+                  <circle cx="14.5" cy="10.5" r="1" fill="currentColor"/>
+                  <path d="M9 14c.8 1.1 1.85 1.75 3 1.75S14.2 15.1 15 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+                Abrir en Waze
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── GALERÍA ── -->
+        <section class="site-section bg-white" id="galeria">
+          <div class="site-container">
+            <div class="site-header">
+              <p class="site-label">Galería</p>
+              <h2 class="site-heading">Nuestra historia en imágenes</h2>
+            </div>
+            <div class="gallery">
+              <div class="gallery__item gallery__item--tall">
+                <div class="gallery__img gallery__img--1"></div>
+              </div>
+              <div class="gallery__item">
+                <div class="gallery__img gallery__img--2"></div>
+              </div>
+              <div class="gallery__item">
+                <div class="gallery__img gallery__img--3"></div>
+              </div>
+              <div class="gallery__item gallery__item--wide">
+                <div class="gallery__img gallery__img--4"></div>
+              </div>
+              <div class="gallery__item">
+                <div class="gallery__img gallery__img--5"></div>
+              </div>
+              <div class="gallery__item">
+                <div class="gallery__img gallery__img--6"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── REGALOS ── -->
+        <section class="site-section bg-olive" id="regalos">
+          <div class="site-container site-container--narrow">
+            <div class="site-header site-header--light">
+              <p class="site-label site-label--light">Regalos</p>
+              <h2 class="site-heading site-heading--light">Con tu presencia es más que suficiente</h2>
+              <p class="site-subheading site-subheading--light">Las muestras de amor las recibimos en SINPE a este número</p>
+            </div>
+            <div class="sinpe-card">
+              <p class="sinpe-card__label">SINPE Móvil</p>
+              <p class="sinpe-card__number">7232-8737</p>
+              <button class="sinpe-card__copy" id="sinpe-copy" aria-live="polite">
+                <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" width="16" height="16">
+                  <rect x="7" y="7" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M13 7V4.5A1.5 1.5 0 0 0 11.5 3h-8A1.5 1.5 0 0 0 2 4.5v8A1.5 1.5 0 0 0 3.5 14H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span id="sinpe-copy-label">Copiar número</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── FOOTER ── -->
+        <footer class="site-footer">
+          <div class="site-footer__inner">
+            <p class="site-footer__ornament" aria-hidden="true">✦</p>
+            <p class="site-footer__names">Josué y Jaqueline</p>
+            <p class="site-footer__date">Sábado, 14 de noviembre de 2026</p>
+            <nav class="site-footer__nav" aria-label="Navegación de pie de página">
+              <a href="#inicio">Inicio</a>
+              <span aria-hidden="true">·</span>
+              <a href="#ubicacion">Ubicación</a>
+              <span aria-hidden="true">·</span>
+              <a href="#galeria">Galería</a>
+              <span aria-hidden="true">·</span>
+              <a href="#regalos">Regalos</a>
+            </nav>
+            <p class="site-footer__tagline">Hecho con amor · Para siempre</p>
+          </div>
+        </footer>
+
       </article>
 
+      <!-- ── ENVELOPE (unchanged) ── -->
       <div class="envelope" id="envelope" aria-hidden="true">
         <div class="envelope__hinge">
           <div class="envelope__track envelope__track--left">
@@ -42,42 +211,143 @@
   </div>
 
   <script>
+  (function () {
+    var stage     = document.getElementById('stage');
+    var envelope  = document.getElementById('envelope');
+    var nav       = document.getElementById('site-nav');
+    var hamburger = document.getElementById('hamburger');
+    var navLinks  = document.getElementById('nav-links');
+    if (!stage || !envelope) return;
+
+    var unlocked = false;
+    var totalMs  = 1000;
+
+    /* ── Guest name from URL  (?nombre=  ?invitado=  ?name=) ──────────── */
     (function () {
-      var stage = document.getElementById('stage');
-      var envelope = document.getElementById('envelope');
-      if (!stage || !envelope) return;
-
-      var unlocked = false;
-      /* Match CSS: envelope slide duration */
-      var totalMs = 1000;
-
-      function reveal() {
-        if (unlocked) return;
-        unlocked = true;
-        envelope.classList.add('is-open');
-        stage.classList.add('is-revealed');
-        stage.setAttribute('aria-label', 'Invitación abierta');
-
-        window.setTimeout(function () {
-          envelope.classList.add('is-gone');
-          stage.removeAttribute('tabindex');
-        }, totalMs);
+      var params   = new URLSearchParams(window.location.search);
+      var rawName  = (params.get('nombre') || params.get('invitado') || params.get('name') || '').trim();
+      var guestEl  = document.getElementById('hero-guest');
+      if (guestEl && rawName) {
+        /* textContent is XSS-safe — never use innerHTML with URL params */
+        guestEl.textContent = rawName;
       }
-
-      stage.addEventListener('click', function (e) {
-        if (unlocked) return;
-        e.preventDefault();
-        reveal();
-      });
-
-      stage.addEventListener('keydown', function (e) {
-        if (unlocked) return;
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          reveal();
-        }
-      });
     })();
+
+    /* ── Countdown  — 14 Nov 2026 10:00 CET (UTC+1) ───────────────────── */
+    (function () {
+      var TARGET   = new Date('2026-11-14T10:00:00+01:00').getTime();
+      var cdEl     = document.getElementById('hero-countdown');
+      var cdDays   = document.getElementById('cd-days');
+      var cdHours  = document.getElementById('cd-hours');
+      var cdMins   = document.getElementById('cd-mins');
+      var cdSecs   = document.getElementById('cd-secs');
+      if (!cdEl) return;
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+      function tick() {
+        var diff = TARGET - Date.now();
+        if (diff <= 0) {
+          cdEl.classList.add('hero-countdown--done');
+          cdEl.innerHTML = '<span class="hero-countdown__msg">¡Hoy es el día! 💍</span>';
+          return; /* stop */
+        }
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor(diff % 86400000 / 3600000);
+        var m = Math.floor(diff % 3600000  / 60000);
+        var s = Math.floor(diff % 60000    / 1000);
+        if (cdDays)  cdDays.textContent  = pad(d);
+        if (cdHours) cdHours.textContent = pad(h);
+        if (cdMins)  cdMins.textContent  = pad(m);
+        if (cdSecs)  cdSecs.textContent  = pad(s);
+        setTimeout(tick, 1000 - (Date.now() % 1000)); /* sync to wall-clock second */
+      }
+      tick();
+    })();
+
+    /* ── Reveal envelope ── */
+    function reveal() {
+      if (unlocked) return;
+      unlocked = true;
+      envelope.classList.add('is-open');
+      stage.classList.add('is-revealed');
+      stage.setAttribute('aria-label', 'Invitación abierta');
+      window.setTimeout(function () {
+        envelope.classList.add('is-gone');
+        stage.removeAttribute('tabindex');
+      }, totalMs);
+    }
+
+    stage.addEventListener('click', function (e) {
+      if (unlocked) return;
+      e.preventDefault();
+      reveal();
+    });
+    stage.addEventListener('keydown', function (e) {
+      if (unlocked) return;
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reveal(); }
+    });
+
+    /* ── Sticky nav ── */
+    function onScroll() {
+      if (!nav) return;
+      nav.classList.toggle('site-nav--visible', window.scrollY > window.innerHeight * 0.6);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ── Smooth scroll for all anchor links ── */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var target = document.getElementById(a.getAttribute('href').slice(1));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (navLinks) navLinks.classList.remove('is-open');
+      if (hamburger) { hamburger.classList.remove('is-active'); hamburger.setAttribute('aria-expanded', 'false'); }
+    });
+
+    /* ── Mobile hamburger ── */
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function () {
+        var open = navLinks.classList.toggle('is-open');
+        hamburger.classList.toggle('is-active', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+      });
+    }
+
+    /* ── SINPE copy button ── */
+    var sinpeBtn   = document.getElementById('sinpe-copy');
+    var sinpeLabel = document.getElementById('sinpe-copy-label');
+    if (sinpeBtn && sinpeLabel) {
+      sinpeBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText('72328737').then(function () {
+          sinpeLabel.textContent = '¡Copiado! ✓';
+          sinpeBtn.classList.add('is-copied');
+          setTimeout(function () {
+            sinpeLabel.textContent = 'Copiar número';
+            sinpeBtn.classList.remove('is-copied');
+          }, 2200);
+        }).catch(function () {
+          /* fallback for browsers without clipboard API */
+          sinpeLabel.textContent = '7232-8737';
+        });
+      });
+    }
+
+    /* ── Scroll-reveal (IntersectionObserver) ── */
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.gallery__item').forEach(function (el) { observer.observe(el); });
+    }
+  })();
   </script>
 </body>
 </html>
