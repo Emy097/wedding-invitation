@@ -1,0 +1,6 @@
+# Exclude large zip downloads — photos are committed extracted
+assets/*.zip
+assets/**/*.zip
+
+# macOS
+.DS_Store

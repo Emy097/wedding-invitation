@@ -311,13 +311,25 @@ body {
 
 /* ── Guest name (populated from ?nombre= URL param) ── */
 .hero-guest {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.85rem;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1.3rem, 6vw, 1.65rem);
+  font-size: clamp(1.4rem, 6.5vw, 1.85rem);
   font-style: italic;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.4;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  line-height: 1.3;
+}
+/* "Para" label — only rendered when the element has content */
+.hero-guest:not(:empty)::before {
+  display: block;
+  content: "Para";
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: normal;
+  font-size: clamp(0.58rem, 1.7vw, 0.7rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 0.35rem;
 }
 /* Hide entirely when JS hasn't populated it */
 .hero-guest:empty { display: none; }
@@ -941,26 +953,15 @@ body {
 .gallery__item:nth-child(5) { transition-delay: 0.24s; }
 .gallery__item:nth-child(6) { transition-delay: 0.30s; }
 
-.gallery__img {
-  width: 100%; height: 100%;
-  display: flex;
-  align-items: flex-end;
-  padding: 0.6rem 0.8rem;
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s ease;
 }
-
-.gallery__img--1 { background: linear-gradient(160deg, #1e2a18 0%, #3d5030 45%, #7a9060 75%, #c4c8a0 100%); }
-.gallery__img--2 { background: linear-gradient(210deg, #4a5a3a 0%, #8a9a6a 55%, #d8e0c0 100%); }
-.gallery__img--3 { background: radial-gradient(ellipse at 35% 65%, #5a7045 0%, #2a3820 70%); }
-.gallery__img--4 { background: linear-gradient(135deg, #2c3824 0%, #4f6035 40%, #9aac7a 70%, #e0e8d0 100%); }
-.gallery__img--5 { background: linear-gradient(185deg, #3a4a2e 0%, #6a8050 50%, #b8c898 100%); }
-.gallery__img--6 { background: linear-gradient(150deg, #283020 0%, #507040 40%, #a0b880 80%, #d8e8c8 100%); }
-
-.gallery__year {
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+.gallery__item:hover img {
+  transform: scale(1.04);
 }
 
 @media (min-width: 900px) {
