@@ -1269,6 +1269,16 @@ body {
    INFINITE GALLERY
    ═══════════════════════════════════════════════════ */
 
+.gallery-hint {
+  margin: -0.5rem 0 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--olive-mid);
+  font-style: italic;
+}
+
 .gallery-infinite {
   position: relative;
   overflow: hidden;
