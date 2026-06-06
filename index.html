@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuestra Boda · Josué y Jaqueline</title>
+  <title>Nuestra Boda · Josué y Jaquelin</title>
+  <link rel="preload" href="assets/sobre-izquierda.png" as="image">
+  <link rel="preload" href="assets/sobre-derecha.png" as="image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -26,7 +29,7 @@
             <div class="card__body-inner">
               <p class="hero-guest" id="hero-guest"></p>
               <p class="hero-invite">Los invitamos a celebrar nuestra boda</p>
-              <h1 class="card__names">Josué y Jaqueline</h1>
+              <h1 class="card__names">Josué y Jaquelin</h1>
               <div class="hero-divider" aria-hidden="true">
                 <span></span><span class="hero-divider__gem">◆</span><span></span>
               </div>
@@ -48,7 +51,7 @@
                   <span class="hero-countdown__label">seg</span>
                 </div>
               </div>
-              <p class="card__date">Sábado, 14 de noviembre de 2026 · 10:00 am</p>
+              <p class="card__date">Sábado, 14 de noviembre de 2026 · 9:00 am</p>
               <p class="card__place">Rancho Doña Carmen · Bebedero, Escazú</p>
               <a href="#ubicacion" class="card__cta">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -66,6 +69,7 @@
             <a href="#inicio" class="site-nav__brand">J &amp; J</a>
             <ul class="site-nav__links" id="nav-links" role="list">
               <li><a href="#ubicacion">Ubicación</a></li>
+              <li><a href="#vestimenta">Vestimenta</a></li>
               <li><a href="#galeria">Galería</a></li>
               <li><a href="#regalos">Regalos</a></li>
             </ul>
@@ -105,7 +109,7 @@
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
                   <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
                 </svg>
-                Ver en Google Maps
+                Google Maps
               </a>
               <a
                 href="https://waze.com/ul?q=WR3R%2B596+Bebedero+San+Jose+Costa+Rica&navigate=yes"
@@ -117,8 +121,31 @@
                   <circle cx="14.5" cy="10.5" r="1" fill="currentColor"/>
                   <path d="M9 14c.8 1.1 1.85 1.75 3 1.75S14.2 15.1 15 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
                 </svg>
-                Abrir en Waze
+                Waze
               </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── VESTIMENTA ── -->
+        <section class="site-section bg-olive" id="vestimenta">
+          <div class="site-container site-container--narrow">
+            <div class="site-header site-header--light">
+              <p class="site-label site-label--light">Código de vestimenta</p>
+              <h2 class="site-heading site-heading--light">Formal de día</h2>
+              <p class="site-subheading site-subheading--light">Se sugiere vestir con colores claros y telas frescas, apropiadas para una ceremonia al aire libre.</p>
+            </div>
+            <div class="dress-rules">
+              <p class="dress-rules__title">Por favor evitar</p>
+              <ul class="dress-rules__list">
+                <li>Color rojo</li>
+                <li>Color blanco, marfil, ivory o champagne muy claro</li>
+                <li>Ropa demasiado informal</li>
+                <li>Prendas excesivamente reveladoras</li>
+                <li>Vestir completamente de negro</li>
+                <li>Colores o estampados que coincidan con el cortejo nupcial</li>
+                <li>Gorras, sombreros informales o accesorios deportivos</li>
+              </ul>
             </div>
           </div>
         </section>
@@ -130,32 +157,9 @@
               <p class="site-label">Galería</p>
               <h2 class="site-heading">Más de Nosotros</h2>
             </div>
-            <div class="gallery">
-              <div class="gallery__item gallery__item--tall">
-                <img src="assets/gallery-dip-kiss.jpg"
-                     alt="Josué y Jaqueline, beso bajo el arco de flores" loading="lazy" decoding="async">
-              </div>
-              <div class="gallery__item">
-                <img src="assets/gallery-balcony.jpg"
-                     alt="Beso con vista al paisaje" loading="lazy" decoding="async">
-              </div>
-              <div class="gallery__item">
-                <img src="assets/gallery-laugh.jpg"
-                     alt="Ella ríe entre los brazos de él" loading="lazy" decoding="async">
-              </div>
-              <div class="gallery__item gallery__item--wide">
-                <img src="assets/gallery-rings.jpg"
-                     alt="Los anillos y la invitación" loading="lazy" decoding="async">
-              </div>
-              <div class="gallery__item">
-                <img src="assets/gallery-aerial.jpg"
-                     alt="Vista aérea de los novios" loading="lazy" decoding="async">
-              </div>
-              <div class="gallery__item">
-                <img src="assets/gallery-chapel.jpg"
-                     alt="Beso en la capilla" loading="lazy" decoding="async">
-              </div>
-            </div>
+          </div>
+          <div class="gallery-infinite" id="gallery-infinite" aria-label="Galería de fotos, arrastra para explorar">
+            <div class="gallery-infinite__track" id="gallery-track" role="presentation"></div>
           </div>
         </section>
 
@@ -164,8 +168,8 @@
           <div class="site-container site-container--narrow">
             <div class="site-header site-header--light">
               <p class="site-label site-label--light">Regalos</p>
-              <h2 class="site-heading site-heading--light">Con tu presencia es más que suficiente</h2>
-              <p class="site-subheading site-subheading--light">Las muestras de amor las recibimos en SINPE a este número</p>
+              <h2 class="site-heading site-heading--light">Si quieres celebrar con un regalo</h2>
+              <p class="site-subheading site-subheading--light">Con mucho amor, lo recibimos vía SINPE Móvil</p>
             </div>
             <div class="sinpe-card">
               <p class="sinpe-card__label">SINPE Móvil</p>
@@ -184,13 +188,17 @@
         <!-- ── FOOTER ── -->
         <footer class="site-footer">
           <div class="site-footer__inner">
-            <p class="site-footer__ornament" aria-hidden="true">✦</p>
-            <p class="site-footer__names">Josué y Jaqueline</p>
+            <div class="site-footer__ornament" aria-hidden="true">
+              <span></span><span class="site-footer__ornament-gem">✦</span><span></span>
+            </div>
+            <p class="site-footer__names">Josué y Jaquelin</p>
             <p class="site-footer__date">Sábado, 14 de noviembre de 2026</p>
             <nav class="site-footer__nav" aria-label="Navegación de pie de página">
               <a href="#inicio">Inicio</a>
               <span aria-hidden="true">·</span>
               <a href="#ubicacion">Ubicación</a>
+              <span aria-hidden="true">·</span>
+              <a href="#vestimenta">Vestimenta</a>
               <span aria-hidden="true">·</span>
               <a href="#galeria">Galería</a>
               <span aria-hidden="true">·</span>
@@ -217,6 +225,9 @@
   </div>
 
   <script>
+  /* Disable browser scroll restoration so a refresh always starts at the top */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
   (function () {
     var stage     = document.getElementById('stage');
     var envelope  = document.getElementById('envelope');
@@ -227,6 +238,10 @@
 
     var unlocked = false;
     var totalMs  = 1000;
+
+    /* ── Lock scroll until envelope is opened ── */
+    window.scrollTo(0, 0);
+    document.body.classList.add('scroll-locked');
 
     /* ── Guest name from URL  (?nombre=  ?invitado=  ?name=) ──────────── */
     (function () {
@@ -239,9 +254,9 @@
       }
     })();
 
-    /* ── Countdown  — 14 Nov 2026 10:00 CET (UTC+1) ───────────────────── */
+    /* ── Countdown  — 14 Nov 2026 09:00 CST (UTC-6) ───────────────────── */
     (function () {
-      var TARGET   = new Date('2026-11-14T10:00:00+01:00').getTime();
+      var TARGET   = new Date('2026-11-14T09:00:00-06:00').getTime();
       var cdEl     = document.getElementById('hero-countdown');
       var cdDays   = document.getElementById('cd-days');
       var cdHours  = document.getElementById('cd-hours');
@@ -282,6 +297,12 @@
         envelope.classList.add('is-gone');
         stage.removeAttribute('tabindex');
       }, totalMs);
+      /* Unlock scroll and nudge the arrow once all hero elements have animated in */
+      window.setTimeout(function () {
+        document.body.classList.remove('scroll-locked');
+        var cta = document.querySelector('.card__cta');
+        if (cta) cta.classList.add('hint');
+      }, 4200);
     }
 
     stage.addEventListener('click', function (e) {
@@ -351,9 +372,142 @@
           }
         });
       }, { threshold: 0.1 });
-      document.querySelectorAll('.gallery__item').forEach(function (el) { observer.observe(el); });
     }
   })();
+
+  /* ── Infinite scrolling gallery ── */
+  (function () {
+    var container = document.getElementById('gallery-infinite');
+    var track     = document.getElementById('gallery-track');
+    if (!container || !track) return;
+
+    var photos = [
+      'assets/gallery-dip-kiss.jpg',
+      'assets/gallery-balcony.jpg',
+      'assets/gallery-laugh.jpg',
+      'assets/gallery-rings.jpg',
+      'assets/gallery-aerial.jpg',
+      'assets/gallery-chapel.jpg',
+      'assets/hero.jpg',
+      'assets/gallery-newspapers-church.jpg',
+      'assets/gallery-kiss-newspapers.jpg',
+      'assets/gallery-ring-smile.jpg',
+      'assets/gallery-ring-butterfly.jpg',
+      'assets/gallery-wisteria-walk.jpg',
+      'assets/gallery-aerial-newspapers.jpg',
+      'assets/gallery-overlook.jpg',
+      'assets/gallery-pond-reflection.jpg',
+      'assets/gallery-carry-bw.jpg'
+    ];
+
+    var GAP   = 6;
+    var COLS  = 5;   /* photos per tile column */
+    var ROWS  = 6;   /* photos per tile row    */
+    var TILES = 3;   /* 3 × 3 tile grid        */
+
+    /* Responsive cell size */
+    var vw     = window.innerWidth;
+    var CELL_W = Math.round(Math.max(150, Math.min(270, vw * 0.28)));
+    var CELL_H = Math.round(CELL_W * 0.78);
+
+    var tileW  = COLS * (CELL_W + GAP);
+    var tileH  = ROWS * (CELL_H + GAP);
+    var totCols = COLS * TILES;
+    var totRows = ROWS * TILES;
+
+    /* Build the grid in JS so we can tile it correctly */
+    track.style.cssText = [
+      'display:grid',
+      'grid-template-columns:repeat(' + totCols + ',' + CELL_W + 'px)',
+      'grid-template-rows:repeat(' + totRows + ',' + CELL_H + 'px)',
+      'gap:' + GAP + 'px',
+      'position:absolute',
+      'top:0',
+      'left:0',
+      'will-change:transform'
+    ].join(';');
+
+    for (var r = 0; r < totRows; r++) {
+      for (var c = 0; c < totCols; c++) {
+        var img = document.createElement('img');
+        img.src     = photos[(r * COLS + c) % photos.length];
+        img.alt     = '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.style.cssText = 'display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none;-webkit-user-drag:none;draggable:false';
+        track.appendChild(img);
+      }
+    }
+
+    /* State */
+    var x = -tileW;   /* start at centre tile */
+    var y = -tileH;
+    var vx = -0.45;   /* auto-scroll velocity */
+    var vy = -0.28;
+    var AUTO_VX = -0.45;
+    var AUTO_VY = -0.28;
+    var dragging  = false;
+    var lastPX, lastPY;
+
+    function clamp() {
+      /* Keep inside the valid tiling window */
+      if (x < -(tileW * 2)) x += tileW;
+      else if (x > 0)        x -= tileW;
+      if (y < -(tileH * 2)) y += tileH;
+      else if (y > 0)        y -= tileH;
+    }
+
+    function render() {
+      track.style.transform = 'translate3d(' + Math.round(x) + 'px,' + Math.round(y) + 'px,0)';
+    }
+
+    (function loop() {
+      if (!dragging) {
+        /* Blend current velocity toward auto-scroll speed */
+        vx = vx * 0.96 + AUTO_VX * 0.04;
+        vy = vy * 0.96 + AUTO_VY * 0.04;
+        x += vx;
+        y += vy;
+      }
+      clamp();
+      render();
+      requestAnimationFrame(loop);
+    }());
+
+    /* ── Mouse ── */
+    container.addEventListener('mousedown', function (e) {
+      dragging = true; lastPX = e.clientX; lastPY = e.clientY;
+      vx = 0; vy = 0;
+      container.classList.add('is-dragging');
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - lastPX; var dy = e.clientY - lastPY;
+      vx = dx; vy = dy; x += dx; y += dy;
+      lastPX = e.clientX; lastPY = e.clientY;
+      clamp(); render();
+    });
+    window.addEventListener('mouseup', function () {
+      if (!dragging) return;
+      dragging = false;
+      container.classList.remove('is-dragging');
+    });
+
+    /* ── Touch ── */
+    container.addEventListener('touchstart', function (e) {
+      dragging = true; lastPX = e.touches[0].clientX; lastPY = e.touches[0].clientY;
+      vx = 0; vy = 0;
+    }, { passive: true });
+    container.addEventListener('touchmove', function (e) {
+      if (!dragging) return;
+      var dx = e.touches[0].clientX - lastPX; var dy = e.touches[0].clientY - lastPY;
+      vx = dx; vy = dy; x += dx; y += dy;
+      lastPX = e.touches[0].clientX; lastPY = e.touches[0].clientY;
+      clamp(); render();
+    }, { passive: true });
+    container.addEventListener('touchend', function () { dragging = false; });
+  }());
   </script>
 </body>
 </html>
