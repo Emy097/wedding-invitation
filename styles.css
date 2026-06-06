@@ -1288,6 +1288,9 @@ body {
   -webkit-user-select: none;
   touch-action: none;
   margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  /* Prevent internal image loads from triggering scroll anchor adjustments */
+  contain: layout style;
+  overflow-anchor: none;
 }
 .gallery-infinite.is-dragging { cursor: grabbing; }
 
