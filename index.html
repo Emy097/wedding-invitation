@@ -470,10 +470,40 @@
     var ENDPOINT    = 'https://script.google.com/macros/s/AKfycbzm-dOiwAIkdVm504FRjCZVGAtGxzuaOVKQJqQaCZ2npiU1UHjq8tAGziMMKv0FOzbd/exec';
     var STORAGE_KEY = 'rsvp_' + nombre;
 
-    var S = { PENDING: 0, WARNING: 1, LOADING: 2, CONFIRMED: 3, DECLINED: 4, ERROR: 5 };
+    var S = { PENDING: 0, WARNING: 1, LOADING: 2, CONFIRMED: 3, DECLINED: 4, ERROR: 5, CHECKING: 6 };
 
-    var saved   = localStorage.getItem(STORAGE_KEY);
-    var initial = saved === 'Si' ? S.CONFIRMED : saved === 'No' ? S.DECLINED : S.PENDING;
+    /* Fetch current status from the sheet (cross-device sync) */
+    function fetchStatus(cb) {
+      var url = ENDPOINT + '?action=status&nombre=' + encodeURIComponent(nombre);
+      fetch(url)
+        .then(function (r) { return r.json(); })
+        .then(function (d) { cb(d.ok ? d.asistencia : null); })
+        .catch(function ()  { cb(null); });
+    }
+
+    var saved = localStorage.getItem(STORAGE_KEY);
+
+    if (saved) {
+      /* Same device: render immediately from localStorage, sync silently in background */
+      render(saved === 'Si' ? S.CONFIRMED : S.DECLINED);
+      fetchStatus(function (remote) {
+        if (remote && remote !== saved) {
+          localStorage.setItem(STORAGE_KEY, remote);
+          render(remote === 'Si' ? S.CONFIRMED : S.DECLINED);
+        }
+      });
+    } else {
+      /* New/different device: fetch from sheet before deciding initial state */
+      render(S.CHECKING);
+      fetchStatus(function (remote) {
+        if (remote) {
+          localStorage.setItem(STORAGE_KEY, remote);
+          render(remote === 'Si' ? S.CONFIRMED : S.DECLINED);
+        } else {
+          render(S.PENDING);
+        }
+      });
+    }
 
     function submit(asistencia) {
       render(S.LOADING);
@@ -505,6 +535,9 @@
               '<button class="rsvp-btn rsvp-btn--decline" data-a="decline">Sí, no podré asistir</button>' +
               '<button class="rsvp-btn rsvp-btn--confirm" data-a="cancel">Cancelar</button>' +
               '</div></div>';
+          break;
+        case S.CHECKING:
+          h = '<p class="rsvp-loading">Comprobando…</p>';
           break;
         case S.LOADING:
           h = '<p class="rsvp-loading">Guardando respuesta…</p>';
