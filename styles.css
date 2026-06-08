@@ -1440,7 +1440,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 30%;
   filter: brightness(0.28) saturate(0.6);
 }
 .rsvp-hero::after {
@@ -1563,9 +1563,12 @@ body {
   gap: 0.6rem;
 }
 .rsvp-status__ornament {
-  font-size: 2.5rem;
-  margin: 0 0 0.25rem;
-  line-height: 1;
+  margin: 0 0 0.5rem;
+}
+.rsvp-status__ornament svg {
+  width: 3rem;
+  height: 3rem;
+  display: block;
 }
 .rsvp-status__ornament--confirmed { color: var(--gold); }
 .rsvp-status__ornament--declined  { color: rgba(250, 246, 240, 0.45); }

@@ -486,7 +486,7 @@
       render(S.CHECKING);
       var url        = ENDPOINT + '?action=status&nombre=' + encodeURIComponent(nombre);
       var controller = new AbortController();
-      var timer      = setTimeout(function () { controller.abort(); }, 8000);
+      var timer      = setTimeout(function () { controller.abort(); }, 15000);
 
       fetch(url, { signal: controller.signal })
         .then(function (r) { return r.json(); })
@@ -542,14 +542,18 @@
           break;
         case S.CONFIRMED:
           h = '<div class="rsvp-status">' +
-              '<p class="rsvp-status__ornament rsvp-status__ornament--confirmed">✓</p>' +
+              '<div class="rsvp-status__ornament rsvp-status__ornament--confirmed">' +
+              '<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/><path d="M12 20.5l6 6 10-12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+              '</div>' +
               '<p class="rsvp-status__text">¡Nos vemos el 14 de noviembre!<br>Has confirmado tu asistencia.</p>' +
               '<button class="rsvp-status__change" data-a="change">Cambiar respuesta</button>' +
               '</div>';
           break;
         case S.DECLINED:
           h = '<div class="rsvp-status">' +
-              '<p class="rsvp-status__ornament rsvp-status__ornament--declined">✕</p>' +
+              '<div class="rsvp-status__ornament rsvp-status__ornament--declined">' +
+              '<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/><path d="M14 14l12 12M26 14l-12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>' +
+              '</div>' +
               '<p class="rsvp-status__text">Lamentamos que no puedas acompañarnos.<br>Hemos registrado tu respuesta.</p>' +
               '<button class="rsvp-status__change" data-a="change">Cambiar respuesta</button>' +
               '</div>';
