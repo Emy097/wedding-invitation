@@ -1734,6 +1734,19 @@ body {
   letter-spacing: 0.08em;
 }
 
+.site-footer__credit {
+  margin: 1.25rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(168, 184, 154, 0.5);
+  letter-spacing: 0.06em;
+}
+.site-footer__credit a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer__credit a:hover { color: #d4b87a; }
+
 /* ═══════════════════════════════════════════════════
    DESKTOP: serve the mobile experience centered
    ═══════════════════════════════════════════════════ */
