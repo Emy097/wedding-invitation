@@ -482,15 +482,22 @@
     /* Always fetch from sheet — no localStorage, works across all devices */
     function fetchStatus() {
       render(S.CHECKING);
-      var url = ENDPOINT + '?action=status&nombre=' + encodeURIComponent(nombre);
-      fetch(url)
+      var url        = ENDPOINT + '?action=status&nombre=' + encodeURIComponent(nombre);
+      var controller = new AbortController();
+      var timer      = setTimeout(function () { controller.abort(); }, 8000);
+
+      fetch(url, { signal: controller.signal })
         .then(function (r) { return r.json(); })
         .then(function (d) {
-          if (d.ok && d.asistencia === 'Si')  render(S.CONFIRMED);
-          else if (d.ok && d.asistencia === 'No') render(S.DECLINED);
-          else render(S.PENDING);
+          clearTimeout(timer);
+          if (d.ok && d.asistencia === 'Si')       render(S.CONFIRMED);
+          else if (d.ok && d.asistencia === 'No')  render(S.DECLINED);
+          else                                      render(S.PENDING);
         })
-        .catch(function () { render(S.PENDING); });
+        .catch(function () {
+          clearTimeout(timer);
+          render(S.PENDING);
+        });
     }
 
     fetchStatus();
