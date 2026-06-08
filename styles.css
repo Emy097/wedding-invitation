@@ -1735,6 +1735,25 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════
+   DESKTOP: serve the mobile experience centered
+   ═══════════════════════════════════════════════════ */
+@media (min-width: 700px) {
+  /* Center the stage — body background fills the sides */
+  .stage {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Align fixed nav to sit exactly over the centered stage */
+  .site-nav {
+    left: calc(50% - 350px);
+    right: auto;
+    width: 700px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
    REDUCED MOTION
    ═══════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
