@@ -91,16 +91,23 @@
         </nav>
 
         <!-- ── ASISTENCIA ── -->
-        <section class="site-section site-section--img-top bg-dark" id="asistencia">
-          <div class="rsvp-section-img" aria-hidden="true">
-            <img src="assets/gallery-rings.jpg" alt="" loading="lazy" decoding="async">
+        <section class="rsvp-hero" id="asistencia">
+          <div class="rsvp-hero__bg" aria-hidden="true">
+            <img src="assets/gallery-pond-reflection.jpg" alt="" loading="lazy" decoding="async">
           </div>
-          <div class="site-container site-container--narrow">
-            <div class="site-header site-header--light">
-              <p class="site-label site-label--gold">Confirmación</p>
-              <h2 class="site-heading site-heading--light">¿Nos acompañarás?</h2>
+          <div class="rsvp-hero__inner">
+            <p class="site-label site-label--gold">Confirmación</p>
+            <h2 class="rsvp-hero__heading">¿Nos acompañarás?</h2>
+            <div class="hero-top-deco rsvp-hero__divider" aria-hidden="true">
+              <span></span><span class="hero-top-deco__gem">✦</span><span></span>
             </div>
             <div class="rsvp-widget" id="rsvp-widget"></div>
+            <a href="#ubicacion" class="card__cta rsvp-hero__cta">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 2v10M2 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Más información</span>
+            </a>
           </div>
         </section>
 
@@ -467,43 +474,25 @@
     var nombre = (p.get('nombre') || p.get('invitado') || p.get('name') || '').trim();
     if (!nombre) return;
 
-    var ENDPOINT    = 'https://script.google.com/macros/s/AKfycbzm-dOiwAIkdVm504FRjCZVGAtGxzuaOVKQJqQaCZ2npiU1UHjq8tAGziMMKv0FOzbd/exec';
-    var STORAGE_KEY = 'rsvp_' + nombre;
+    var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzm-dOiwAIkdVm504FRjCZVGAtGxzuaOVKQJqQaCZ2npiU1UHjq8tAGziMMKv0FOzbd/exec';
 
     var S = { PENDING: 0, WARNING: 1, LOADING: 2, CONFIRMED: 3, DECLINED: 4, ERROR: 5, CHECKING: 6 };
 
-    /* Fetch current status from the sheet (cross-device sync) */
-    function fetchStatus(cb) {
+    /* Always fetch from sheet — no localStorage, works across all devices */
+    function fetchStatus() {
+      render(S.CHECKING);
       var url = ENDPOINT + '?action=status&nombre=' + encodeURIComponent(nombre);
       fetch(url)
         .then(function (r) { return r.json(); })
-        .then(function (d) { cb(d.ok ? d.asistencia : null); })
-        .catch(function ()  { cb(null); });
+        .then(function (d) {
+          if (d.ok && d.asistencia === 'Si')  render(S.CONFIRMED);
+          else if (d.ok && d.asistencia === 'No') render(S.DECLINED);
+          else render(S.PENDING);
+        })
+        .catch(function () { render(S.PENDING); });
     }
 
-    var saved = localStorage.getItem(STORAGE_KEY);
-
-    if (saved) {
-      /* Same device: render immediately from localStorage, sync silently in background */
-      render(saved === 'Si' ? S.CONFIRMED : S.DECLINED);
-      fetchStatus(function (remote) {
-        if (remote && remote !== saved) {
-          localStorage.setItem(STORAGE_KEY, remote);
-          render(remote === 'Si' ? S.CONFIRMED : S.DECLINED);
-        }
-      });
-    } else {
-      /* New/different device: fetch from sheet before deciding initial state */
-      render(S.CHECKING);
-      fetchStatus(function (remote) {
-        if (remote) {
-          localStorage.setItem(STORAGE_KEY, remote);
-          render(remote === 'Si' ? S.CONFIRMED : S.DECLINED);
-        } else {
-          render(S.PENDING);
-        }
-      });
-    }
+    fetchStatus();
 
     function submit(asistencia) {
       render(S.LOADING);
@@ -512,7 +501,6 @@
         .then(function (r) { return r.json(); })
         .then(function (d) {
           if (d.ok) {
-            localStorage.setItem(STORAGE_KEY, asistencia);
             render(asistencia === 'Si' ? S.CONFIRMED : S.DECLINED);
           } else { render(S.ERROR); }
         })
@@ -544,14 +532,14 @@
           break;
         case S.CONFIRMED:
           h = '<div class="rsvp-status">' +
-              '<p class="rsvp-status__ornament">✦</p>' +
+              '<p class="rsvp-status__ornament rsvp-status__ornament--confirmed">✓</p>' +
               '<p class="rsvp-status__text">¡Nos vemos el 14 de noviembre!<br>Has confirmado tu asistencia.</p>' +
               '<button class="rsvp-status__change" data-a="change">Cambiar respuesta</button>' +
               '</div>';
           break;
         case S.DECLINED:
           h = '<div class="rsvp-status">' +
-              '<p class="rsvp-status__ornament">◆</p>' +
+              '<p class="rsvp-status__ornament rsvp-status__ornament--declined">✕</p>' +
               '<p class="rsvp-status__text">Lamentamos que no puedas acompañarnos.<br>Hemos registrado tu respuesta.</p>' +
               '<button class="rsvp-status__change" data-a="change">Cambiar respuesta</button>' +
               '</div>';
@@ -576,7 +564,6 @@
           case 'decline':  submit('No');        break;
           case 'cancel':   render(S.PENDING);   break;
           case 'change':
-            localStorage.removeItem(STORAGE_KEY);
             render(S.PENDING);
             break;
           case 'retry':    render(S.PENDING);   break;
