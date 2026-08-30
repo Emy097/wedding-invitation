@@ -314,7 +314,9 @@
 
     var _p      = new URLSearchParams(window.location.search);
     var _nombre = (_p.get('nombre') || _p.get('invitado') || _p.get('name') || '').trim();
-    var _valid  = _nombre && VALID_NAMES.indexOf(_nombre) !== -1;
+    /* ?extra → invitación extra: bypass the guest list, but still require a name */
+    var _extra  = _p.has('extra');
+    var _valid  = _nombre && (_extra || VALID_NAMES.indexOf(_nombre) !== -1);
 
     if (!_valid) {
       var _inv = document.getElementById('invite-invalid');
@@ -482,7 +484,7 @@
 
     var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzm-dOiwAIkdVm504FRjCZVGAtGxzuaOVKQJqQaCZ2npiU1UHjq8tAGziMMKv0FOzbd/exec';
 
-    var S = { PENDING: 0, WARNING: 1, LOADING: 2, CONFIRMED: 3, DECLINED: 4, ERROR: 5, CHECKING: 6 };
+    var S = { PENDING: 0, WARNING: 1, LOADING: 2, CONFIRMED: 3, DECLINED: 4, ERROR: 5, CHECKING: 6, UNKNOWN: 7 };
 
     /* Always fetch from sheet — no localStorage, works across all devices */
     function fetchStatus() {
@@ -497,6 +499,8 @@
           clearTimeout(timer);
           if (d.ok && d.asistencia === 'Si')       render(S.CONFIRMED);
           else if (d.ok && d.asistencia === 'No')  render(S.DECLINED);
+          /* Name reached the page (?extra) but isn't registered in the sheet */
+          else if (!d.ok && d.error === 'not_found')  render(S.UNKNOWN);
           else                                      render(S.PENDING);
         })
         .catch(function () {
@@ -515,6 +519,8 @@
         .then(function (d) {
           if (d.ok) {
             render(asistencia === 'Si' ? S.CONFIRMED : S.DECLINED);
+          } else if (d.error === 'not_found') {
+            render(S.UNKNOWN);
           } else { render(S.ERROR); }
         })
         .catch(function () { render(S.ERROR); });
@@ -559,6 +565,11 @@
               '</div>' +
               '<p class="rsvp-status__text">Lamentamos que no puedas acompañarnos.<br>Hemos registrado tu respuesta.</p>' +
               '<button class="rsvp-status__change" data-a="change">Cambiar respuesta</button>' +
+              '</div>';
+          break;
+        case S.UNKNOWN:
+          h = '<div class="rsvp-status">' +
+              '<p class="rsvp-status__text">No encontramos tu nombre en nuestra lista de invitados.<br>Por favor escríbenos para confirmar tu asistencia.</p>' +
               '</div>';
           break;
         case S.ERROR:
